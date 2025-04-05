@@ -16,8 +16,7 @@ val provider = GoogleFont.Provider(
 val bodyFontFamily = FontFamily(
     Font(
         googleFont = GoogleFont("Poppins"),
-        fontProvider = provider,
-    )
+        fontProvider = provider,)
 )
 
 val displayFontFamily = FontFamily(
