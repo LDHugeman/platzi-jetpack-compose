@@ -11,6 +11,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.juandgaines.todoapp.ui.theme.TodoAppTheme
+import com.juandgaines.todoapp.ui.theme.components.HelloWorld
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,21 +21,10 @@ class MainActivity : ComponentActivity() {
             TodoAppTheme() {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     HelloWorld(
-                        modifier = Modifier.fillMaxSize()
-                            .padding(innerPadding)
+                        modifier = Modifier.padding(innerPadding)
                     )
                 }
             }
         }
     }
-}
-
-@Composable
-fun HelloWorld(
-    modifier: Modifier = Modifier
-) {
-    Text(
-        text = "Hello, World!",
-        modifier = modifier
-    )
 }
