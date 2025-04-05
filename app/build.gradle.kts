@@ -74,6 +74,7 @@ dependencies {
     implementation(libs.androidx.material3)
     //TODO: 3.5 Agregar libreria fuentes google
     implementation(libs.androidx.ui.text.google.fonts)
+    implementation(libs.androidx.ui.text.google.fonts)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 

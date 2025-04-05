@@ -5,7 +5,6 @@ import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 
-//TODO: 3.1 Mirgrar archivos de tema y arreglar imports
 private val lightScheme = lightColorScheme(
     primary = primaryLight,
     onPrimary = onPrimaryLight,
@@ -81,17 +80,12 @@ private val darkScheme = darkColorScheme(
     surfaceContainerHigh = surfaceContainerHighDark,
     surfaceContainerHighest = surfaceContainerHighestDark,
 )
-// TODO: 3.3 Remover temas sin usar
 
-
-//TODO: 3.2 Cambiar nombre de tema
 @Composable
 fun TodoAppTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
-    // TODO: 3.4 Remover dynamicColor
     content: @Composable() () -> Unit
 ) {
-    // TODO: 3.4 Remover dynamicColor
     val colorScheme = if (darkTheme)
         darkScheme
     else
