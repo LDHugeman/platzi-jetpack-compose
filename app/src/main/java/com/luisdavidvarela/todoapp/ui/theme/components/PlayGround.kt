@@ -1,4 +1,4 @@
-package com.juandgaines.todoapp.ui.theme.components
+package com.luisdavidvarela.todoapp.ui.theme.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -26,7 +26,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.juandgaines.todoapp.ui.theme.TodoAppTheme
+import com.luisdavidvarela.todoapp.ui.theme.TodoAppTheme
 
 @Composable
 fun HelloWorld(

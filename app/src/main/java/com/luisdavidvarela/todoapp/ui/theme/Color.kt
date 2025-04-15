@@ -1,4 +1,4 @@
-package com.juandgaines.todoapp.ui.theme
+package com.luisdavidvarela.todoapp.ui.theme
 import androidx.compose.ui.graphics.Color
 
 val primaryLight = Color(0xFF6A5F11)

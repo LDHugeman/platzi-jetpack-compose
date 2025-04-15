@@ -15,11 +15,11 @@ room {
 */
 
 android {
-    namespace = "com.juandgaines.todoapp"
+    namespace = "com.luisdavidvarela.todoapp"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.juandgaines.todoapp"
+        applicationId = "com.luisdavidvarela.todoapp"
         minSdk = 26
         targetSdk = 34
         versionCode = 1
