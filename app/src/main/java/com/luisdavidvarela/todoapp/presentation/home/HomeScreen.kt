@@ -113,6 +113,8 @@ fun HomeScreen(
                 SummaryInfo(
                     date = state.date,
                     taskSummary = state.summary,
+                    completedTask = state.completedTask.size,
+                    totalTask = state.completedTask.size + state.pendingTask.size,
                 )
             }
 
