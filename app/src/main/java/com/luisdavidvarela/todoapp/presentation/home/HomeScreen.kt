@@ -2,6 +2,7 @@
 
 package com.luisdavidvarela.todoapp.presentation.home
 
+import android.widget.Toast
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -25,27 +26,75 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
-import com.luisdavidvarela.todoapp.domain.Task
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.luisdavidvarela.todoapp.R
+import com.luisdavidvarela.todoapp.presentation.home.components.SectionTitle
+import com.luisdavidvarela.todoapp.presentation.home.components.SummaryInfo
+import com.luisdavidvarela.todoapp.presentation.home.components.TaskItem
 import com.luisdavidvarela.todoapp.presentation.home.providers.HomeScreenPreviewProvider
 import com.luisdavidvarela.todoapp.ui.theme.TodoAppTheme
+
+@Composable
+fun HomeScreenRoot() {
+    val viewModel = viewModel<HomeScreenViewModel>()
+    val state = viewModel.state
+    val event = viewModel.event
+
+    val context = LocalContext.current
+
+    LaunchedEffect(true) {
+        event.collect { event ->
+            when (event) {
+                HomeScreenEvent.DeletedAllTasks -> {
+                    Toast.makeText(
+                        context,
+                        context.getString(R.string.all_tasks_deleted),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+                HomeScreenEvent.DeletedTask -> {
+                    Toast.makeText(
+                        context,
+                        context.getString(R.string.task_deleted),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+                HomeScreenEvent.UpdatedTasks -> {
+                    Toast.makeText(
+                        context,
+                        context.getString(R.string.task_updated),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+        }
+    }
+
+    HomeScreen(
+        state = state,
+        onAction = viewModel::onAction
+    )
+}
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun HomeScreen(
     modifier: Modifier = Modifier,
     state: HomeDataState,
+    onAction: (HomeScreenAction) -> Unit,
 ) {
     var isMenuExpanded by remember { mutableStateOf(false) }
 
@@ -75,14 +124,21 @@ fun HomeScreen(
                         )
                         DropdownMenu(
                             expanded = isMenuExpanded,
+                            modifier = Modifier.background(
+                                color = MaterialTheme.colorScheme.surfaceContainerHighest
+                            ),
                             onDismissRequest = { isMenuExpanded = false }
                         ) {
                             DropdownMenuItem(
-                                onClick = { isMenuExpanded = false },
                                 text = {
                                     Text(
                                         text = stringResource(id = R.string.delete_all),
+                                        color = MaterialTheme.colorScheme.onSurface
                                     )
+                                },
+                                onClick = {
+                                    onAction(HomeScreenAction.OnDeleteAllTasks)
+                                    isMenuExpanded = false
                                 }
                             )
                         }
@@ -113,7 +169,7 @@ fun HomeScreen(
                 SummaryInfo(
                     date = state.date,
                     taskSummary = state.summary,
-                    completedTask = state.completedTask.size,
+                    completedTasks = state.completedTask.size,
                     totalTask = state.completedTask.size + state.pendingTask.size,
                 )
             }
@@ -137,8 +193,12 @@ fun HomeScreen(
                         .animateItem(),
                     task = task,
                     onClickItem = {},
-                    onDeleteItem = {},
-                    onToggleCompletion = {},
+                    onDeleteItem = {
+                        onAction(HomeScreenAction.OnDeleteTask(task))
+                    },
+                    onToggleCompletion = {
+                        onAction(HomeScreenAction.OnToggleTask(task))
+                    },
                 )
             }
 
@@ -161,8 +221,12 @@ fun HomeScreen(
                         .animateItem(),
                     task = task,
                     onClickItem = {},
-                    onDeleteItem = {},
-                    onToggleCompletion = {},
+                    onDeleteItem = {
+                        onAction(HomeScreenAction.OnDeleteTask(task))
+                    },
+                    onToggleCompletion = {
+                        onAction(HomeScreenAction.OnToggleTask(task))
+                    },
                 )
             }
         }
@@ -180,8 +244,9 @@ fun HomeScreenPreviewLight(
                 date = state.date,
                 summary = state.summary,
                 completedTask = state.completedTask,
-                pendingTask = state.pendingTask
-            )
+                pendingTask = state.pendingTask,
+            ),
+            onAction = {}
         )
     }
 }
@@ -200,15 +265,9 @@ fun HomeScreenPreviewDark(
                 date = state.date,
                 summary = state.summary,
                 completedTask = state.completedTask,
-                pendingTask = state.pendingTask
-            )
+                pendingTask = state.pendingTask,
+            ),
+            onAction = {}
         )
     }
 }
-
-data class HomeDataState(
-    val date: String,
-    val summary: String,
-    val completedTask: List<Task>,
-    val pendingTask: List<Task>
-)
