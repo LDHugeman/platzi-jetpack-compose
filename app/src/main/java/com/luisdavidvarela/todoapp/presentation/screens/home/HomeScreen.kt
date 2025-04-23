@@ -48,7 +48,7 @@ import com.luisdavidvarela.todoapp.presentation.screens.home.providers.HomeScree
 import com.luisdavidvarela.todoapp.ui.theme.TodoAppTheme
 
 @Composable
-fun HomeScreenRoot(navigateToTaskScreen: () -> Unit) {
+fun HomeScreenRoot(navigateToTaskScreen: (String?) -> Unit) {
     val viewModel = viewModel<HomeScreenViewModel>()
     val state = viewModel.state
     val event = viewModel.event
@@ -87,8 +87,11 @@ fun HomeScreenRoot(navigateToTaskScreen: () -> Unit) {
         state = state,
         onAction = { action ->
             when (action) {
+                is HomeScreenAction.OnClickTask -> {
+                    navigateToTaskScreen(action.taskId)
+                }
                 HomeScreenAction.OnAddTask -> {
-                    navigateToTaskScreen()
+                    navigateToTaskScreen(null)
                 }
                 else -> {
                     viewModel.onAction(action)
@@ -190,12 +193,12 @@ fun HomeScreen(
                     modifier = Modifier
                         .fillParentMaxWidth()
                         .background(color = MaterialTheme.colorScheme.surface),
-                    title = stringResource(id = R.string.completed_tasks)
+                    title = stringResource(id = R.string.pedindg_tasks)
                 )
             }
 
             items(
-                state.completedTask,
+                state.pendingTask,
                 key = { task -> task.id }
             ) { task ->
                 TaskItem(
@@ -203,7 +206,9 @@ fun HomeScreen(
                         .clip(RoundedCornerShape(8.dp))
                         .animateItem(),
                     task = task,
-                    onClickItem = {},
+                    onClickItem = {
+                        onAction(HomeScreenAction.OnClickTask(task.id))
+                    },
                     onDeleteItem = {
                         onAction(HomeScreenAction.OnDeleteTask(task))
                     },
@@ -218,12 +223,12 @@ fun HomeScreen(
                     modifier = Modifier
                         .fillParentMaxWidth()
                         .background(color = MaterialTheme.colorScheme.surface),
-                    title = stringResource(id = R.string.pedindg_tasks)
+                    title = stringResource(id = R.string.completed_tasks)
                 )
             }
 
             items(
-                state.pendingTask,
+                state.completedTask,
                 key = { task -> task.id }
             ) { task ->
                 TaskItem(
@@ -231,7 +236,9 @@ fun HomeScreen(
                         .clip(RoundedCornerShape(8.dp))
                         .animateItem(),
                     task = task,
-                    onClickItem = {},
+                    onClickItem = {
+                        onAction(HomeScreenAction.OnClickTask(task.id))
+                    },
                     onDeleteItem = {
                         onAction(HomeScreenAction.OnDeleteTask(task))
                     },
@@ -240,6 +247,10 @@ fun HomeScreen(
                     },
                 )
             }
+
+
+
+
         }
     }
 }
