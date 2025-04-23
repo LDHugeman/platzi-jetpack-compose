@@ -1,6 +1,6 @@
 @file:OptIn(ExperimentalMaterial3Api::class)
 
-package com.luisdavidvarela.todoapp.presentation.home
+package com.luisdavidvarela.todoapp.presentation.screens.home
 
 import android.widget.Toast
 import androidx.compose.foundation.ExperimentalFoundationApi
@@ -41,10 +41,10 @@ import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.luisdavidvarela.todoapp.R
-import com.luisdavidvarela.todoapp.presentation.home.components.SectionTitle
-import com.luisdavidvarela.todoapp.presentation.home.components.SummaryInfo
-import com.luisdavidvarela.todoapp.presentation.home.components.TaskItem
-import com.luisdavidvarela.todoapp.presentation.home.providers.HomeScreenPreviewProvider
+import com.luisdavidvarela.todoapp.presentation.screens.home.components.SectionTitle
+import com.luisdavidvarela.todoapp.presentation.screens.home.components.SummaryInfo
+import com.luisdavidvarela.todoapp.presentation.screens.home.components.TaskItem
+import com.luisdavidvarela.todoapp.presentation.screens.home.providers.HomeScreenPreviewProvider
 import com.luisdavidvarela.todoapp.ui.theme.TodoAppTheme
 
 @Composable

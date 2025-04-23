@@ -2,8 +2,8 @@ package com.luisdavidvarela.todoapp.data
 
 import com.luisdavidvarela.todoapp.domain.Task
 import com.luisdavidvarela.todoapp.domain.TaskLocalDataSource
-import com.luisdavidvarela.todoapp.presentation.home.providers.completedTask
-import com.luisdavidvarela.todoapp.presentation.home.providers.pendingTask
+import com.luisdavidvarela.todoapp.presentation.screens.home.providers.completedTask
+import com.luisdavidvarela.todoapp.presentation.screens.home.providers.pendingTask
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow

@@ -1,4 +1,4 @@
-package com.luisdavidvarela.todoapp.presentation.home.components
+package com.luisdavidvarela.todoapp.presentation.screens.home.components
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding

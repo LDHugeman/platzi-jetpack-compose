@@ -1,4 +1,4 @@
-package com.luisdavidvarela.todoapp.presentation.home
+package com.luisdavidvarela.todoapp.presentation.screens.home
 
 import com.luisdavidvarela.todoapp.domain.Task
 

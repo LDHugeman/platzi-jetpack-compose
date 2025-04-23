@@ -1,4 +1,4 @@
-package com.luisdavidvarela.todoapp.presentation.home
+package com.luisdavidvarela.todoapp.presentation.screens.home
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
