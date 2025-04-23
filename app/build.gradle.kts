@@ -75,6 +75,8 @@ dependencies {
     //TODO: 3.5 Agregar libreria fuentes google
     implementation(libs.androidx.ui.text.google.fonts)
     implementation(libs.androidx.ui.text.google.fonts)
+    implementation(libs.androidx.navigation.runtime.ktx)
+    implementation(libs.navigation.compose)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 

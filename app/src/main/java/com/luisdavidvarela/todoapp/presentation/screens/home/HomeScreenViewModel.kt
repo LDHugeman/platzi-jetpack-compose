@@ -31,8 +31,14 @@ class HomeScreenViewModel: ViewModel() {
         )
         taskLocalDataSource.taskFlow
             .onEach {
-            val completedTask = it.filter { task -> task.isCompleted }
-            val pendingTask = it.filter { task -> !task.isCompleted }
+            val completedTask = it
+                .filter { task -> task.isCompleted }
+                .sortedByDescending { task ->
+                    task.date }
+            val pendingTask = it
+                .filter { task -> !task.isCompleted }
+                .sortedByDescending { task ->
+                    task.date }
 
             state = state.copy(
                 summary = pendingTask.size.toString(),
