@@ -48,8 +48,11 @@ import com.luisdavidvarela.todoapp.presentation.screens.home.providers.HomeScree
 import com.luisdavidvarela.todoapp.ui.theme.TodoAppTheme
 
 @Composable
-fun HomeScreenRoot(navigateToTaskScreen: (String?) -> Unit) {
-    val viewModel = viewModel<HomeScreenViewModel>()
+fun HomeScreenRoot(
+    navigateToTaskScreen: (String?) -> Unit,
+    viewModel: HomeScreenViewModel
+) {
+
     val state = viewModel.state
     val event = viewModel.event
 

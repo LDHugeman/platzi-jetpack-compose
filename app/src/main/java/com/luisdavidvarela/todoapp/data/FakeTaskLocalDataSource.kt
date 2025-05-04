@@ -43,7 +43,7 @@ object FakeTaskLocalDataSource: TaskLocalDataSource {
         _taskFlow.value = tasks
     }
 
-    override suspend fun deleteAllTasks() {
+    override suspend fun removeAllTasks() {
         _taskFlow.value = emptyList()
     }
 
