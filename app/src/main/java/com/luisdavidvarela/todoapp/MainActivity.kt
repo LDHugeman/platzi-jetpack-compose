@@ -8,7 +8,9 @@ import androidx.navigation.compose.rememberNavController
 import com.luisdavidvarela.todoapp.navigation.NavigationRoot
 import com.luisdavidvarela.todoapp.presentation.screens.detail.TaskScreenRoot
 import com.luisdavidvarela.todoapp.ui.theme.TodoAppTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
