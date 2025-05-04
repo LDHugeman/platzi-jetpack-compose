@@ -5,14 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory.Companion.APPLICATION_KEY
-import androidx.lifecycle.createSavedStateHandle
 import androidx.lifecycle.viewModelScope
-import androidx.lifecycle.viewmodel.initializer
-import androidx.lifecycle.viewmodel.viewModelFactory
-import com.luisdavidvarela.todoapp.TodoApplication
-import com.luisdavidvarela.todoapp.data.FakeTaskLocalDataSource
 import com.luisdavidvarela.todoapp.domain.TaskLocalDataSource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
@@ -39,7 +32,7 @@ class HomeScreenViewModel @Inject constructor(
     init {
         state = state.copy(
             date = LocalDate.now().let {
-                DateTimeFormatter.ofPattern("EEEE, MMMM dd yyyy" ).format(it)
+                DateTimeFormatter.ofPattern("EEE, MMMM dd yyyy" ).format(it)
             }
         )
         taskLocalDataSource.taskFlow
@@ -64,7 +57,7 @@ class HomeScreenViewModel @Inject constructor(
     fun onAction(action: HomeScreenAction) {
         viewModelScope.launch {
             when (action) {
-                HomeScreenAction.OnAddTask -> {
+                HomeScreenAction.OnDeleteAllTasks -> {
                     taskLocalDataSource.removeAllTasks()
                     eventChannel.send(HomeScreenEvent.DeletedAllTasks)
                 }
@@ -75,6 +68,7 @@ class HomeScreenViewModel @Inject constructor(
                 is HomeScreenAction.OnToggleTask -> {
                     val updatedTask = action.task.copy(isCompleted = !action.task.isCompleted)
                     taskLocalDataSource.updateTask(updatedTask)
+                    eventChannel.send(HomeScreenEvent.UpdatedTask)
                 }
                 else -> Unit
             }
