@@ -162,7 +162,7 @@ fun HomeScreen(
                         text = stringResource(R.string.no_tasks),
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                         modifier = Modifier.semantics {
-                            contentDescription = "Empty Task State"
+                            contentDescription = "Empty Tasks State"
                         },
                         style = MaterialTheme.typography.bodyLarge
                     )
